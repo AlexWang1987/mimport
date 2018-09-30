@@ -1,0 +1,26 @@
+{
+  "name": "mimport",
+  "version": "1.0.0",
+  "description": "a univeral module loader in web enviroment.",
+  "main": "dist/index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "test/index.js"
+  },
+  "keywords": [
+    "mimport"
+  ],
+  "author": "AlexWang",
+  "license": "MIT",
+  "dependencies": {},
+  "wbp": {
+    "project": "umd",
+    "entries": {
+      "index": "./src/index.js"
+    },
+    "source": "src/",
+    "build": "dist/"
+  }
+}
