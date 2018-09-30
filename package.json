@@ -22,5 +22,13 @@
     },
     "source": "src/",
     "build": "dist/"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexWang1987/mimport.git"
+  },
+  "bugs": {
+    "url": "https://github.com/AlexWang1987/mimport/issues"
+  },
+  "homepage": "https://github.com/AlexWang1987/mimport#readme"
 }
