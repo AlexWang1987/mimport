@@ -1,5 +1,5 @@
 {
-  "name": "mimport",
+  "name": "modreq",
   "version": "1.0.0",
   "description": "a univeral module loader in web enviroment.",
   "main": "dist/index.js",
