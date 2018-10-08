@@ -12,13 +12,46 @@
 //  Description: wbp-init-umd-main
 //
 // //////////////////////////////////////////////////////////////////////////////
-if (WBP_DEV && module.hot) { module.hot.accept(); }
+function mresolver(m_url) {
+  return new Promise(function(res, rej) {
+    const mount_target = (document.getElementsByTagName('head') || document.getElementsByTagName('head'))[0]
+    const script = document.createElement('script')
+    script.type = 'text/javascript'
+    script.charset = 'utf-8'
+    script.async = true
+    script.src = m_url
+    script.timeout = 8000
+    let timer = 0
+    const clear = function() {
+      clearTimeout(timer)
+      script.onload = null
+      script.onerror = null
+      mount_target.removeChild(script)
+    }
+    script.onload = function() {
+      clear()
+      res()
+    }
+    script.onerror = function() {
+      clear()
+      rej(new Error(`${m_url} module got fatal error.`))
+    }
+    timer = setTimeout(clear, 8000)
+    mount_target.appendChild(script)
+  })
+}
 
-(async function main() {
-  try {
-    console.log('HAPPY CODING YEAH!');
-
-  } catch (e) {
-    console.error('MAIN ERROR->', e);
+module.exports = function(repo_url) {
+  return function(m_id) {
+    let m_verson = 'latest'
+    const is_version_provided = /\/(\d+\.\d+\.\d+$)/.test(m_id)
+    if (is_version_provided) {
+      const id_version = m_id.split('/')
+      m_id = id_version[0]
+      m_verson = id_version[1]
+    }
+    return mresolver(`${repo_url}/${m_id}/${m_verson}/index.js`).then(() => {
+      return window[m_id]
+    })
   }
-}());
+}

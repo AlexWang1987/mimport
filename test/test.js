@@ -13,4 +13,8 @@
 //
 // //////////////////////////////////////////////////////////////////////////////
 
-console.log('HAPPY TESTING!');
+const mimport = require('../')('http://192.168.2.187:9191')
+
+mimport('com.dh.m1/1.2.3').then((m1) => {
+  console.log(m1);
+})
