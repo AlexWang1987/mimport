@@ -51,7 +51,12 @@ module.exports = function(repo_url) {
       m_verson = id_version[1]
     }
     return mresolver(`${repo_url}/${m_id}/${m_verson}/index.js`).then(() => {
-      return window[m_id]
+      const mod = window[m_id]
+
+      if(mod && mod.__esModule)
+        return mod.default
+
+      return mod
     })
   }
 }
